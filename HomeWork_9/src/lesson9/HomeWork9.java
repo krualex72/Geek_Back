@@ -81,7 +81,7 @@ class HomeWork9 {
     static List<String> listedStudents(List<Student> students, Course selectedCourse) {
         return students.stream()// стрим из Lista студентов
                 .filter(student -> student.getAllCourses() // намудрил :о)
-                        .stream().anyMatch(course -> course.courseName == selectedCourse.courseName))
+                        .stream().anyMatch(course -> course.getCourseName() == selectedCourse.getCourseName()))
                 .map(Student::getName)
                 .collect(Collectors.toList()); // собираем коллекцию
     }

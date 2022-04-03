@@ -8,7 +8,7 @@ interface ICourse {
 }
 
 class Course implements ICourse{
-    public String courseName;
+    private String courseName;
     private Integer courseId;
 
     public Course(Integer courseId, String courseName) {
