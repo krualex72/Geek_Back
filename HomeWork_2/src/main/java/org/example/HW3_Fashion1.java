@@ -2,23 +2,23 @@ package org.example;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.Iterator;
-import java.util.List;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 import static org.junit.Assert.assertEquals;
 
 public class HW3_Fashion1 {
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) {
 
         WebDriverManager.chromedriver().setup(); // установка WebDriver
         ChromeOptions options = new ChromeOptions(); // установка опций для Хрома
@@ -26,22 +26,13 @@ public class HW3_Fashion1 {
         //options.addArguments("--headless"); // не открываем хром как окно
         options.addArguments("start-maximized"); // максимальный размер окна браузера
 
-
+//      Первый тест-кейс FASHION - 01
         WebDriver driver = new ChromeDriver(options);
         driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
         driver.get("http://automationpractice.com/"); // FASHION - 01 шаг 1
 
         WebElement searchField = driver.findElement(By.id("search_query_top")); // поле ввода запроса поиска
         WebElement buttonSearch = driver.findElement(By.name("submit_search"));
-//        WebElement webElement2 = driver.findElement(By.cssSelector("input.gLFyf.gsfi"));
-//        WebElement webElement3 = driver.findElement(By.xpath(".//input[@name='q']"));
-
-        try {
-            WebElement webElementError = driver.findElement(By.name("error"));
-        } catch (NoSuchElementException e){
-            System.out.println(e.getSupportUrl());
-        }
-
         searchField.sendKeys("Blouse"); // FASHION - 01 шаг 2
         buttonSearch.click(); // FASHION - 01 шаг 2 (продолжение)
 
@@ -65,7 +56,6 @@ public class HW3_Fashion1 {
 
         String parentWindowHandler = driver.getWindowHandle(); // сохраняем родительское окно
         String subWindowHandler = null;
-
         buttonAddToCart.click();  // FASHION - 02 шаг 4
 
         Set<String> handles = driver.getWindowHandles(); // получаем набор десрипторов окон
@@ -74,8 +64,10 @@ public class HW3_Fashion1 {
             subWindowHandler = iterator.next();
         }
         driver.switchTo().window(subWindowHandler); // переключаемся к всплывающему окну
+
         WebElement buttonContinue = driver.findElement(By.xpath(".//span[@class='continue btn btn-default button exclusive-medium']")); // выбор белого цвета
-        Thread.sleep(10000l);
+        //new WebDriverWait(driver, 7).until(ExpectedConditions.elementToBeClickable(buttonContinue));
+        // Thread.sleep(10000l);
         buttonContinue.click();  // FASHION - 02 шаг 5
         driver.switchTo().window(parentWindowHandler);  // переключаемся к родительскому окну
         Actions builder4 = new Actions(driver); // FASHION - 02 шаг 14 (предыдущие шаги пропущены, посколку фактически повторяют итерации)
@@ -100,7 +92,8 @@ public class HW3_Fashion1 {
         }
         driver.switchTo().window(subWindowHandler1); // переключаемся к всплывающему окну
         WebElement buttonClose = driver.findElement(By.xpath(".//span[@class='cross']")); // выбор белого цвета
-        Thread.sleep(5000l);
+        // Thread.sleep(5000l); реализовано через Wait
+        //new WebDriverWait(driver, 7).until(ExpectedConditions.elementToBeClickable(buttonClose));
         buttonClose.click();  // FASHION - 02 шаг 19
         driver.switchTo().window(parentWindowHandler1);  // переключаемся к родительскому окну
 
@@ -110,13 +103,13 @@ public class HW3_Fashion1 {
         //Thread.sleep(10000l);
         buttonOrder.click();  // FASHION - 02 шаг 22
 
-        //      Третий тест-кейс FASHION - 03 (шаг 1 = шаг 22 предыдущего теста)
+        // Третий тест-кейс FASHION - 03 (шаг 1 = шаг 22 предыдущего теста)
         WebElement buttonProceed = driver.findElement(By.xpath(".//a[contains(@class,'standard-checkout')] ")); // Кнопка Check Out
         //Thread.sleep(10000l);
         buttonProceed.click();  // FASHION - 03 шаг 2
         WebElement fieldEmail = driver.findElement(By.xpath(".//input[@id='email']")); // поле email для зарегистрированных пользователей
         //Thread.sleep(10000l);
-        fieldEmail.sendKeys("krutikov-alex@ya.ru");;  // FASHION - 03 шаг 3/1
+        fieldEmail.sendKeys("krutikov-alex@ya.ru");  // FASHION - 03 шаг 3/1
         WebElement fieldPwd = driver.findElement(By.xpath(".//input[@id='passwd']")); // поле пароля для зарегистрированных пользователей
         //Thread.sleep(10000l);
         fieldPwd.sendKeys("TestPass");;  // FASHION - 03 шаг 3/2
@@ -160,8 +153,8 @@ public class HW3_Fashion1 {
         orderLink.click();  // FASHION - 04 шаг 3
         String lastName = driver.findElement(By.xpath(".//ul[@class='address alternate_item box']//span[@class='address_lastname']")).getText(); // выборочная проверка результата
         assertEquals("Krutikov", lastName);
-        String totalPrice = driver.findElement(By.xpath(".//tr[@class='totalprice item']/td[2]")).getText(); // FASHION - 03 шаг 10 проверка результата
-        System.out.println(totalPrice);
+        String totalPrice = driver.findElement(By.xpath(".//tr[@class='totalprice item']/td[2]")).getText(); // FASHION - 04 шаг 3 проверка результата
+//        System.out.println(totalPrice);
         assertEquals("$88.91", totalPrice);
 
 
