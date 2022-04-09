@@ -59,21 +59,4 @@ public class TriangleTest {
         Assertions.assertThrows(MyExceptions.class,()-> triangleArea.triangleArea(-10,24,18));
         logger.info("Тест 'Отрицательная сторона' завершён успешно");
     }
-//        @ParameterizedTest
-//        @Disabled("В работе")
-//        @CsvSource({ "10,20,30","100, 200,300","1,2,3"})
-//        void testWithCsvSource(int a, int b, int result) throws MyException {
-//            ExampleClass exampleClass = new ExampleClass();
-//            Assertions.assertEquals(result,exampleClass.someMethod(a,b));
-
-//        }
-
-//        @ParameterizedTest
-//        @CsvSource({ "-10,20","-100, 200","1,-2"})
-//        void testWithCsvSourceN(int a, int b) throws MyException {
-//            ExampleClass exampleClass = new ExampleClass();
-//            Assertions.assertThrows(MyException.class,()-> exampleClass.someMethod(a,b));
-//
-//        }
-
 }
