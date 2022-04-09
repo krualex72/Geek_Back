@@ -6,8 +6,8 @@ import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class HW4Test {
-    private static Logger logger = LoggerFactory.getLogger(HW4Test.class);
+public class TriangleTest {
+    private static Logger logger = LoggerFactory.getLogger(TriangleTest.class);
 
     @Test
     @DisplayName("Норма")
