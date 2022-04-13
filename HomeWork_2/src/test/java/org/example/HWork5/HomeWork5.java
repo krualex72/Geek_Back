@@ -60,9 +60,9 @@ public class HomeWork5 {
     @AfterEach
     void logOut() throws InterruptedException {
         Thread.sleep(2000);
-//        WebElement logOut = getDriver().findElement(By.xpath(".//a[@class='logout']")); // Кнопка Sign Out
-//        //Thread.sleep(1000l);
-//        logOut.click();
+        WebElement logOut = getDriver().findElement(By.xpath(".//a[@class='logout']")); // Кнопка Sign Out
+        //Thread.sleep(1000l);
+        logOut.click();
     }
 
     @AfterAll
@@ -104,7 +104,7 @@ public class HomeWork5 {
     @Test
     @DisplayName("Fashion - 2")
     void cartFilling() throws InterruptedException {
-        JavascriptExecutor jsExecutor = (JavascriptExecutor) getDriver(); // FASHION - 02 шаг 2 (шаг 1 выполнен в предусловии AfterAll)
+        JavascriptExecutor jsExecutor = (JavascriptExecutor) getDriver(); // FASHION - 02 шаг 2 (шаг 1 выполнен в предусловии BeforeAll)
         jsExecutor.executeScript("window.scrollBy(0,750)");
         Actions builder3 = new Actions(getDriver()); // FASHION - 02 шаг 3
         builder3.moveToElement(getDriver().findElement(By.xpath(".//img[@alt='Faded Short Sleeve T-shirts']"))).build().perform();
@@ -204,7 +204,7 @@ public class HomeWork5 {
         WebElement buttonOrder = getDriver().findElement(By.xpath(".//a[@id='button_order_cart']")); // Кнопка Check Out
         buttonOrder.click();  // FASHION - 02 шаг 1
         WebElement buttonProceed = getDriver().findElement(By.xpath(".//a[contains(@class,'standard-checkout')] ")); // Кнопка Check Out
-        buttonProceed.click();  // FASHION - 03 шаг 2 (шаг 3 и 4 выполнен в предусловии AfterAll)
+        buttonProceed.click();  // FASHION - 03 шаг 2 (шаг 3 и 4 выполнен в предусловии BeforeAll)
         jsExecutor.executeScript("window.scrollBy(0,500)");
         // валидация полученных данных FASHION - 03 шаг 5
         String[] siteDataArrary = {
@@ -248,12 +248,14 @@ public class HomeWork5 {
         JavascriptExecutor jsExecutor = (JavascriptExecutor) getDriver();
         WebElement buttonAccount = getDriver().findElement(By.xpath(".//a[@class='account']")); // Кнопка Входа в аккаунт
         buttonAccount.click();  // FASHION - 04 шаг 1
-        WebElement buttonOrderHistory = getDriver().findElement(By.xpath(".//a[@title='Orders']")); // Кнопка Входа в аккаунт
+        WebElement buttonOrderHistory = getDriver().findElement(By.xpath(".//a[@title='Orders']")); // Кнопка Входа в Заказы
         buttonOrderHistory.click();  // FASHION - 04 шаг 2
-
+        Thread.sleep(1000); // время для отрисовки страницы
+        jsExecutor.executeScript("window.scrollBy(0, window.innerHeight)");
         WebElement orderLink = getDriver().findElement(By.xpath(".//a[contains(text(),'WFAWJIFAN')]")); // ссылка на искомый заказ
         orderLink.click();  // FASHION - 04 шаг 3
-        jsExecutor.executeScript("window.scrollBy(0,900)");
+        Thread.sleep(1000); // время для отрисовки страницы
+        jsExecutor.executeScript("window.scrollBy(0,1200)");
         // Проверка данных заказа
         String[] siteDataArrary = {
                 String.valueOf(getDriver().findElement(By.xpath(".//ul[@class='address alternate_item box']//span[@class='address_lastname']")).getText()),
@@ -278,30 +280,68 @@ public class HomeWork5 {
         JavascriptExecutor jsExecutor = (JavascriptExecutor) getDriver();
         WebElement buttonAccount = getDriver().findElement(By.xpath(".//a[@class='account']")); // Кнопка Входа в аккаунт
         buttonAccount.click();  // FASHION - 04 шаг 1
-        WebElement buttonOrderHistory = getDriver().findElement(By.xpath(".//a[@title='Orders']")); // Кнопка Входа в аккаунт
+        WebElement buttonOrderHistory = getDriver().findElement(By.xpath(".//a[@title='Orders']")); // Кнопка Входа в Заказы
         buttonOrderHistory.click();  // FASHION - 04 шаг 2
-
+        Thread.sleep(1000); // время для отрисовки страницы
+        jsExecutor.executeScript("window.scrollBy(0, window.innerHeight)");
         WebElement orderLink = getDriver().findElement(By.xpath(".//a[contains(text(),'WFAWJIFAN')]")); // ссылка на искомый заказ
         orderLink.click();  // FASHION - 04 шаг 3
-        jsExecutor.executeScript("window.scrollBy(0,900)");
-        // Проверка данных заказа
+        Thread.sleep(1000); // время для отрисовки страницы
+        jsExecutor.executeScript("window.scrollBy(0, window.innerHeight)");
+        Actions sendMessage = new Actions(getDriver());
+        sendMessage.sendKeys(getDriver().findElement(By.xpath(".//textarea")),"Some message") // вводим сообщение в поле
+                .pause(1000l)
+                .click(getDriver().findElement(By.xpath(".//button[@name='submitMessage']")))
+                .build()
+                .perform();
+        // Проверка данных и статуса сообщения
         String[] siteDataArrary = {
-                String.valueOf(getDriver().findElement(By.xpath(".//ul[@class='address alternate_item box']//span[@class='address_lastname']")).getText()),
-                String.valueOf(getDriver().findElement(By.xpath(".//tr[@class='totalprice item']/td[2]")).getText()),
-                String.valueOf(getDriver().findElement(By.xpath(".//h1[@class='page-heading']")).getText()),
-                String.valueOf(getDriver().findElement(By.xpath(".//p[@class='dark']")).getText())
+                String.valueOf(getDriver().findElement(By.xpath(".//p[@class='alert alert-success']")).getText()),
+                String.valueOf(getDriver().findElement(By.xpath(".//th[contains(text(),'Message')]/../../following::tbody/tr/td[2]")).getText())
         };
         String[] expectedDataArrary = {
-                "Krutikov",
-                "$88.91",
-                "FOLLOW YOUR ORDER'S STATUS STEP-BY-STEP",
-                "Order Reference WFAWJIFAN -- placed on 04/03/2022"
+                "Message successfully sent",
+                "Some message"
         };
         assertArrayEquals(siteDataArrary, expectedDataArrary);
 
         Thread.sleep(5000); // исключительно, чтобы заметить результат
     }
 
+    @Test
+    @DisplayName("Fashion - 6")// Проверка корректности сохраненного в аккаунте адреса
+    void checkMyAddresses() throws InterruptedException {
+
+        WebElement buttonAccount = getDriver().findElement(By.xpath(".//a[@class='account']")); // Кнопка Входа в аккаунт
+        buttonAccount.click();
+        WebElement buttonAddresses = getDriver().findElement(By.xpath(".//a[@title='Addresses']")); // Кнопка Входа в сохраненные адреса аккаунта
+        buttonAddresses.click();
+        Thread.sleep(1000); // время для отрисовки страницы
+        // Проверка данных страницы и сохраненных адресов
+        String[] siteDataArrary = {
+                String.valueOf(getDriver().findElement(By.xpath(".//h1")).getText()),
+                String.valueOf(getDriver().findElement(By.xpath(".//h3")).getText()),
+                String.valueOf(getDriver().findElement(By.xpath(".//h3/../following::li/span")).getText()),
+                String.valueOf(getDriver().findElement(By.xpath(".//h3/../following::li/span[2]")).getText()),
+                String.valueOf(getDriver().findElement(By.xpath(".//span[@class='address_address1']")).getText()),
+                String.valueOf(getDriver().findElement(By.xpath(".//span[@class='address_address1']/../following::li")).getText()),
+                String.valueOf(getDriver().findElement(By.xpath(".//span[@class='address_address1']/../following::li[2]")).getText()),
+                String.valueOf(getDriver().findElement(By.xpath(".//span[@class='address_phone_mobile']")).getText())
+        };
+        String[] expectedDataArrary = {
+                "MY ADDRESSES",
+                "MY ADDRESS",
+                "Alex",
+                "Krutikov",
+                "Collins Ave. 23",
+                "Hollywood, Florida 13139",
+                "United States",
+                "3055658989"
+        };
+        assertArrayEquals(siteDataArrary, expectedDataArrary);
+
+        Thread.sleep(5000); // исключительно, чтобы заметить результат
+    }
 
     public static WebDriver getDriver() {
         return driver;
