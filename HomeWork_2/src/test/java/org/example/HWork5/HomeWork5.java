@@ -105,7 +105,8 @@ public class HomeWork5 {
     @DisplayName("Fashion - 2")
     void cartFilling() throws InterruptedException {
         JavascriptExecutor jsExecutor = (JavascriptExecutor) getDriver(); // FASHION - 02 шаг 2 (шаг 1 выполнен в предусловии BeforeAll)
-        jsExecutor.executeScript("window.scrollBy(0,750)");
+        int y = 750; // просто проверить концепцию в работе со скриптами
+        jsExecutor.executeScript("window.scrollBy(0," + y + ")");
         Actions builder3 = new Actions(getDriver()); // FASHION - 02 шаг 3
         builder3.moveToElement(getDriver().findElement(By.xpath(".//img[@alt='Faded Short Sleeve T-shirts']"))).build().perform();
         WebElement buttonAddToCart = getDriver().findElement(By.xpath(".//a[@title='Add to cart']")); // кнопка Add To Cart
