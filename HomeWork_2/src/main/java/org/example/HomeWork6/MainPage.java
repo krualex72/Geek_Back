@@ -1,6 +1,5 @@
 package org.example.HomeWork6;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -32,6 +31,14 @@ public class MainPage extends AbstractPage {
     @FindBy(xpath = ".//a[@class='button lnk_view btn btn-default']") // модель Blouse кнопка More
     private WebElement buttonMore;
 
+    @FindBy(xpath = ".//a[@title='Add to cart']") // кнопа Add to Cart
+    private WebElement buttonAddToCart;
+
+    @FindBy(xpath = ".//a[@data-id-product='7']/following-sibling::*[1]") // кнопа Add to Cart
+    private WebElement buttonMoreChiffonDress;
+
+
+
     public MainPage clickPopular(){
         popular.click();
         return this;
@@ -42,13 +49,30 @@ public class MainPage extends AbstractPage {
         return this;
     }
 
-    public MainPage clickTShirts(){
-        tShirts.click();
+    public MainPage clickButtonMoreChiffonDress(){
+        buttonMoreChiffonDress.click();
+        return this;
+    }
+
+    public MainPage hoverChiffonDress(){
+        Actions hover = new Actions(getWebDriver());
+        hover.moveToElement(сhiffonDress).build().perform();
+        return this;
+    }
+
+    public MainPage hoverTShirts(){
+        Actions hover = new Actions(getWebDriver());
+        hover.moveToElement(tShirts).build().perform();
         return this;
     }
 
     public MainPage clickChiffonDress(){
         сhiffonDress.click();
+        return this;
+    }
+
+    public MainPage clickButtonAddToCart(){
+        buttonAddToCart.click();
         return this;
     }
 
