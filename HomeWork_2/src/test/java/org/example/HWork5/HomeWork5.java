@@ -144,7 +144,7 @@ public class HomeWork5 {
             subWindowHandler1 = iterator1.next();
         }
         getDriver().switchTo().window(subWindowHandler1); // переключаемся к всплывающему окну
-        WebElement buttonClose = getDriver().findElement(By.xpath(".//span[@class='cross']")); // выбор белого цвета
+        WebElement buttonClose = getDriver().findElement(By.xpath(".//span[@class='cross']")); // закрываем окно
         Thread.sleep(5000);
         buttonClose.click();  // FASHION - 02 шаг 19
         getDriver().switchTo().window(parentWindowHandler1);  // переключаемся к родительскому окну
@@ -204,7 +204,7 @@ public class HomeWork5 {
         builder5.moveToElement(getDriver().findElement(By.xpath(".//a[@title='View my shopping cart']"))).build().perform();
         WebElement buttonOrder = getDriver().findElement(By.xpath(".//a[@id='button_order_cart']")); // Кнопка Check Out
         buttonOrder.click();  // FASHION - 02 шаг 1
-        WebElement buttonProceed = getDriver().findElement(By.xpath(".//a[contains(@class,'standard-checkout')] ")); // Кнопка Check Out
+        WebElement buttonProceed = getDriver().findElement(By.xpath(".//a[contains(@class,'standard-checkout')] ")); // Кнопка Proceed to Check Out
         buttonProceed.click();  // FASHION - 03 шаг 2 (шаг 3 и 4 выполнен в предусловии BeforeAll)
         jsExecutor.executeScript("window.scrollBy(0,500)");
         // валидация полученных данных FASHION - 03 шаг 5

@@ -45,8 +45,7 @@ public class AbstractTest {
 
     @AfterEach
     void logOut() throws InterruptedException {
-        TopMenu topMenu = new TopMenu(getWebDriver());
-        topMenu.clickSignOut();
+        new TopMenu(getWebDriver()).clickSignOut();
     }
 
     @AfterAll

@@ -20,10 +20,5 @@ public class Fashion1 extends AbstractTest{
         Assertions.assertTrue(new ModelPage(getWebDriver()).getSelectMSize().equals("M"),
                 "Размер выбран неправильно!!!");
         Thread.sleep(5000); // исключительно, чтобы заметить результат
-
-       // Assertions.assertEquals("https://",getWebDriver().getCurrentUrl());
-
-
-
     }
 }

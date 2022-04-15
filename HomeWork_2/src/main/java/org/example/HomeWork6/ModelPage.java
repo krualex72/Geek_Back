@@ -17,15 +17,20 @@ public class ModelPage extends AbstractPage {
     @FindBy(xpath = ".//a[@id='color_8']") // кнопка выбора белого цвета
     private WebElement whiteColor;
 
+    @FindBy(xpath = ".//a[@id='color_15']") // кнопка выбора белого цвета
+    private WebElement greenColor;
+
     @FindBy(xpath = ".//select[@id='group_1']/option[2]") // кнопка вызова выпадающего меню
     private WebElement selectMSize;
+
+    @FindBy(xpath = ".//button[@class='exclusive']") // кнопка Добавить в корзину
+    private WebElement addToCart;
 
     public void getSizeByIndex(int x) {
         Actions builder = new Actions(getWebDriver());
         builder.moveToElement(selectButton).build().perform();
         Select select = new Select(selector);
         select.selectByIndex(x);  // выбор размера 1 = М
-//        whiteColor.click();
     }
 
     public String getSelectMSize() {
@@ -34,6 +39,14 @@ public class ModelPage extends AbstractPage {
 
     public void getColorWhite() {
         whiteColor.click();
+    }
+
+    public void addToCart() {
+        addToCart.click();
+    }
+
+    public void getColorGreen() {
+        greenColor.click();
     }
 
     public ModelPage(WebDriver webDriver) {
