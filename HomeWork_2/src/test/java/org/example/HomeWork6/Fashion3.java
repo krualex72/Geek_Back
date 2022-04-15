@@ -12,13 +12,6 @@ public class Fashion3 extends AbstractTest{
     void placeOrder() throws InterruptedException {
         new MainPage(getWebDriver()).scrollUpDown(750);
         new MainPage(getWebDriver()).getTShirtToCart(); // используем как предусловие во многих тестах
-//        new MainPage(getWebDriver()).clickPopular();
-//        new MainPage(getWebDriver()).hoverTShirts();
-//        new MainPage(getWebDriver()).clickButtonAddToCart();
-//        String parentWindowHandler = new MainPage(getWebDriver()).switchToPopUp(); // переключаемся к всплывающему окну
-//        Thread.sleep(2000); // исключительно, чтобы заметить результат
-//        new PopUp(getWebDriver()).clickButtonContinue();
-//        getWebDriver().switchTo().window(parentWindowHandler);  // переключаемся к родительскому окну
         new ShoppingCart(getWebDriver()).viewShoppingCart();
         new ShoppingCart(getWebDriver()).checkOut();
         new ShoppingCart(getWebDriver()).scrollUpDown(550);

@@ -96,9 +96,6 @@ public class MainPage extends AbstractPage {
         Thread.sleep(2000); // исключительно, чтобы заметить результат
         new PopUp(getWebDriver()).clickButtonContinue();
         getWebDriver().switchTo().window(parentWindowHandler);  // переключаемся к родительскому окну
-//        Actions builder = new Actions(getWebDriver());
-//        builder.moveToElement(imageBlouse).build().perform();
-//        buttonMore.click();
     }
 
     public MainPage(WebDriver webDriver) {

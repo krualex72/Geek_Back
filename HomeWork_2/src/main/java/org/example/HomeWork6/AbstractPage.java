@@ -23,7 +23,7 @@ public abstract class AbstractPage {
 
     public void scrollScreenDown(){
         JavascriptExecutor jsExecutor = (JavascriptExecutor) webDriver; // getDriver();?
-        jsExecutor.executeScript("window.scrollBy(0, window.innerHeight");
+        jsExecutor.executeScript("window.scrollBy(0, window.innerHeight)");
     }
 
     public String switchToPopUp(){
