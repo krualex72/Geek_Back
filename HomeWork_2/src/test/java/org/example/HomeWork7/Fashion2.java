@@ -1,5 +1,6 @@
 package org.example.HomeWork7;
 
+import io.qameta.allure.*;
 import org.example.HomeWork6.MainPage;
 import org.example.HomeWork6.ModelPage;
 import org.example.HomeWork6.PopUp;
@@ -8,10 +9,16 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
 
+@Story("Поведение Юзера на сайте")
 public class Fashion2 extends AbstractTest {
 
     @Test
-    @DisplayName("Fashion - 2")
+    @DisplayName("Cart Filling")
+    @Description("Filling the Cart with different ways")
+    //@Link("http://automationpractice.com/index.php")
+    @Issue("https://github.com/krualex72/HomeWork_9/tree/master/HomeWork_2/src/test/java/org/example/HomeWork7")
+    @Severity(SeverityLevel.CRITICAL)
+    @Step("Проверка наполнения карты различными способами")
     void cartFilling() throws InterruptedException {
         new MainPage(getWebDriver()).scrollUpDown(750);
         new MainPage(getWebDriver()).getTShirtToCart(); // используется потом как предусловие
@@ -29,7 +36,7 @@ public class Fashion2 extends AbstractTest {
         new ShoppingCart(getWebDriver()).checkOut();
         new ShoppingCart(getWebDriver()).scrollUpDown(550);
         new ShoppingCart(getWebDriver()).validateResult(); // проверяем результат
-       Thread.sleep(5000); // исключительно, чтобы заметить результат
+       Thread.sleep(2000); // исключительно, чтобы заметить результат
 
     }
 

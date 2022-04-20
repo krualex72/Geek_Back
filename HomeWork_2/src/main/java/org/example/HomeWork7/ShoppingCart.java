@@ -1,5 +1,6 @@
 package org.example.HomeWork7;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -75,6 +76,7 @@ public class ShoppingCart extends AbstractPage {
         return this;
     }
 
+    @Step("Проверка корректности наполнения корзины")
     public void validateResult() {
         String[] siteDataArrary = {
                 String.valueOf(getWebDriver().findElement(By.id("summary_products_quantity")).getText()),
@@ -97,6 +99,7 @@ public class ShoppingCart extends AbstractPage {
         assertArrayEquals(siteDataArrary, expectedDataArrary, "Данные в корзине неверные!");
     }
 
+    @Step("Проверка корректности наполнения корзины")
     public void validateResult1() {
         String[] siteDataArrary = {
                 String.valueOf(getWebDriver().findElement(By.xpath(".//ul[@id='address_delivery']//li[contains(@class,'address_lastname')]")).getText()),
@@ -111,6 +114,7 @@ public class ShoppingCart extends AbstractPage {
         assertArrayEquals(siteDataArrary, expectedDataArrary, "Данные в корзине неверные!");
     }
 
+    @Step("Проверка корректности наполнения корзины")
     public void validateResult2() {
         String[] siteDataArrary1 = {
                 String.valueOf(getWebDriver().findElement(By.xpath(".//p[@class='alert alert-success']")).getText()),
