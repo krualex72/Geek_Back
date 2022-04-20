@@ -86,6 +86,7 @@ public class MyWebDriverEventListener implements WebDriverEventListener {
 
     @Override
     public void afterClickOn(WebElement element, WebDriver driver) {
+        System.out.println("The element "+ element + " was clicked");
 
     }
 

@@ -36,7 +36,7 @@ public abstract class AbstractTest {
         WebDriverManager.chromedriver().setup();
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--incognito");
-        //options.addArguments("--headless");
+        options.addArguments("--headless");
         options.addArguments("start-maximized");
         options.setPageLoadTimeout(Duration.ofSeconds(30));
 
