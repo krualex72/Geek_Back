@@ -19,6 +19,8 @@
     <webdrivermanager.version>5.0.3</webdrivermanager.version>
     <junit.version>5.6.2</junit.version>
     <selenium.version>4.0.0</selenium.version>
+    <allure.version>2.15.0</allure.version>
+    <allure-maven.version>2.10.0</allure-maven.version>
   </properties>
 
   <dependencies>
@@ -61,6 +63,18 @@
       <groupId>io.github.bonigarcia</groupId>
       <artifactId>webdrivermanager</artifactId>
       <version>${webdrivermanager.version}</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>io.qameta.allure</groupId>
+      <artifactId>allure-junit5</artifactId>
+      <version>${allure.version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>io.qameta.allure</groupId>
+      <artifactId>allure-java-commons</artifactId>
+      <version>${allure.version}</version>
       <scope>compile</scope>
     </dependency>
     <dependency>
@@ -127,6 +141,14 @@
         <configuration>
           <source>8</source>
           <target>8</target>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>io.qameta.allure</groupId>
+        <artifactId>allure-maven</artifactId>
+        <version> ${allure-maven.version} </version>
+        <configuration>
+          <buildDirectory>C:\Users\kruti\IdeaProjects\HomeWork_2</buildDirectory>
         </configuration>
       </plugin>
     </plugins>
