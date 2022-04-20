@@ -5,6 +5,7 @@ import org.example.HomeWork6.OrderHistory;
 import org.example.HomeWork6.TopMenu;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.openqa.selenium.WebDriver;
 
 public class Fashion5 extends AbstractTest {
 
@@ -21,4 +22,5 @@ public class Fashion5 extends AbstractTest {
         Thread.sleep(3000); // исключительно, чтобы заметить результат
 
     }
+
 }

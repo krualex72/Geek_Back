@@ -6,6 +6,7 @@ import org.example.HomeWork6.PopUp;
 import org.example.HomeWork6.ShoppingCart;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.openqa.selenium.WebDriver;
 
 public class Fashion2 extends AbstractTest {
 
@@ -31,4 +32,5 @@ public class Fashion2 extends AbstractTest {
        Thread.sleep(5000); // исключительно, чтобы заметить результат
 
     }
+
 }

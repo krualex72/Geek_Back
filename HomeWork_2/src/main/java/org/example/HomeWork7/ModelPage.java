@@ -1,5 +1,7 @@
 package org.example.HomeWork7;
 
+import io.qameta.allure.Attachment;
+import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -25,6 +27,7 @@ public class ModelPage extends AbstractPage {
 
     @FindBy(xpath = ".//button[@class='exclusive']") // кнопка Добавить в корзину
     private WebElement addToCart;
+
 
     public void getSizeByIndex(int x) {
         Actions builder = new Actions(getWebDriver());

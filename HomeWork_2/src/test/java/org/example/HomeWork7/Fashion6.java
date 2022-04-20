@@ -5,6 +5,7 @@ import org.example.HomeWork6.MyAddresses;
 import org.example.HomeWork6.TopMenu;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.openqa.selenium.WebDriver;
 
 public class Fashion6 extends AbstractTest {
 
@@ -16,4 +17,5 @@ public class Fashion6 extends AbstractTest {
         new MyAddresses(getWebDriver()).validateResult();
         Thread.sleep(3000); // исключительно, чтобы заметить результат
     }
+
 }
