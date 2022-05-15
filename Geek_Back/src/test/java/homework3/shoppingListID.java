@@ -17,7 +17,7 @@ public class shoppingListID {
     private String id;
 
     @Test
-    void addRecipeToMealPlan() {
+    void addProductToShoppingList() {
         id = given()
                 .queryParam("hash", hash)
                 .queryParam("apiKey", apiKey)
