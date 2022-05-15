@@ -2,6 +2,7 @@ package homework3;
 
 import io.restassured.path.json.JsonPath;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static io.restassured.RestAssured.given;
@@ -16,7 +17,7 @@ public class shoppingListID {
 
     private String id;
 
-    @Test
+    @BeforeEach // добавление продукта в корзину
     void addProductToShoppingList() {
         id = given()
                 .queryParam("hash", hash)
@@ -40,10 +41,24 @@ public class shoppingListID {
         System.out.println("The product has been added to the shopping list with ID No " + id);
     }
 
-    @AfterEach
-    //@Test
+    @Test
+    void getShoppingList() {
+        JsonPath response = given()
+                .queryParam("hash", hash)
+                .queryParam("apiKey", apiKey)
+                .log()
+                .all()
+                .when()
+                .get("https://api.spoonacular.com/mealplanner/krualex/shopping-list")
+                .prettyPeek()
+                .body()
+                .jsonPath();
+        assertThat(response.get("aisles[0].items[1].id"), equalTo(Integer.parseInt(id))); // проверяем, что товар с ID в листе
+    }
+
+    @AfterEach // удаления продкута из списка
     void tearDown() {
-        JsonPath response =given()
+        JsonPath response = given()
                 .queryParam("hash", hash)
                 .queryParam("apiKey", apiKey)
                 .log()
