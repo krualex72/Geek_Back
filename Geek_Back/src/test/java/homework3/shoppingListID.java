@@ -17,8 +17,8 @@ public class shoppingListID {
 
     private String id;
 
-    @BeforeEach // добавление продукта в корзину
-    void addProductToShoppingList() {
+    @Test
+    void ProductAndShoppingList() { // добавление продукта в корзину
         id = given()
                 .queryParam("hash", hash)
                 .queryParam("apiKey", apiKey)
@@ -39,11 +39,8 @@ public class shoppingListID {
                 .get("id")
                 .toString();
         System.out.println("The product has been added to the shopping list with ID No " + id);
-    }
 
-    @Test
-    void getShoppingList() {
-        JsonPath response = given()
+        JsonPath response = given() // проверка, что продкут в корзине
                 .queryParam("hash", hash)
                 .queryParam("apiKey", apiKey)
                 .log()
@@ -54,22 +51,18 @@ public class shoppingListID {
                 .body()
                 .jsonPath();
         assertThat(response.get("aisles[0].items[1].id"), equalTo(Integer.parseInt(id))); // проверяем, что товар с ID в листе
-    }
+        System.out.println("The product (ID-" + id + ") is in the shopping list!");
 
-    @AfterEach // удаления продкута из списка
-    void tearDown() {
-        JsonPath response = given()
+        JsonPath response2 = given() // удаление продукта из корзины
                 .queryParam("hash", hash)
                 .queryParam("apiKey", apiKey)
                 .log()
                 .all()
                 .delete(baseUrl + id)
                 .prettyPeek()
-                //.then() // так было в примере лекции - ниже удачный и более валидный эксперимент
-                //.statusCode(200)
                 .body()
                 .jsonPath();
-        assertThat(response.get("status"), equalTo("success"));
+        assertThat(response2.get("status"), equalTo("success"));
         System.out.println("The product (ID-" + id + ") has been deleted from the shopping list!");
     }
 }
