@@ -1,4 +1,4 @@
-package homework6.db.dao;
+package db.dao;
 
 import db.model.Categories;
 import db.model.CategoriesExample;

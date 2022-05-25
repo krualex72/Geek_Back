@@ -1,6 +1,5 @@
 package homework6;
 
-import homework6.db.dao.CategoriesMapper;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -21,7 +20,7 @@ public class ExampleMain {
         SqlSessionFactory sqlSessionFactory = new
                 SqlSessionFactoryBuilder().build(inputStream);
         SqlSession session = sqlSessionFactory.openSession();
-        CategoriesMapper categoriesMapper = session.getMapper(CategoriesMapper.class);
+        db.dao.CategoriesMapper categoriesMapper = session.getMapper(db.dao.CategoriesMapper.class);
         db.model.CategoriesExample example = new db.model.CategoriesExample();
         example.createCriteria().andIdEqualTo(1L);
         List<db.model.Categories> list = categoriesMapper.selectByExample(example);

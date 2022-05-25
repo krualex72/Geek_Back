@@ -1,4 +1,4 @@
-package homework6.db.dao;
+package db.dao;
 
 import db.model.Products;
 import db.model.ProductsExample;
