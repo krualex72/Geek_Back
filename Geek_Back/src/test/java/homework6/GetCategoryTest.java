@@ -33,6 +33,7 @@ public class GetCategoryTest {
         response.body().getProducts().forEach(product ->
                 assertThat(product.getCategoryTitle(), equalTo("Electronic")));
         System.err.println("The Category with Id-2 is exist");
+        // тут SQL ни к чему :о) Максим разрешил пропустить :о)))
     }
 
 }
